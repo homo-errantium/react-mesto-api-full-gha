@@ -13,16 +13,25 @@ class Api {
     }
 
     getUserInfo() {
+        const token = localStorage.getItem('token');
         const requestUrl = this._baseUrl + '/users/me';
         return fetch(requestUrl, {
-            headers: this._headers,
+            headers: {
+                'content-type': 'application/json',
+                authorization: `Bearer ${token}`,
+            },
         }).then(this._checkResponse);
     }
 
     getInitialCards() {
+        const token = localStorage.getItem('token');
         const requestUrl = this._baseUrl + '/cards';
         return fetch(requestUrl, {
-            headers: this._headers,
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json',
+                authorization: `Bearer ${token}`,
+            },
         }).then(this._checkResponse);
     }
 
@@ -31,52 +40,76 @@ class Api {
     }
 
     setUserInfo(body) {
+        const token = localStorage.getItem('token');
         const requestUrl = this._baseUrl + '/users/me';
         return fetch(requestUrl, {
             method: 'PATCH',
-            headers: this._headers,
+            headers: {
+                'content-type': 'application/json',
+                authorization: `Bearer ${token}`,
+            },
             body: JSON.stringify(body),
         }).then(this._checkResponse);
     }
 
     addNewCard(body) {
+        const token = localStorage.getItem('token');
         const requestUrl = this._baseUrl + '/cards';
         return fetch(requestUrl, {
             method: 'POST',
-            headers: this._headers,
+            headers: {
+                'content-type': 'application/json',
+                authorization: `Bearer ${token}`,
+            },
             body: JSON.stringify(body),
         }).then(this._checkResponse);
     }
 
     deleteCard(cardId) {
+        const token = localStorage.getItem('token');
         const requestUrl = this._baseUrl + `/cards/${cardId}`;
         return fetch(requestUrl, {
             method: 'DELETE',
-            headers: this._headers,
+            headers: {
+                'content-type': 'application/json',
+                authorization: `Bearer ${token}`,
+            },
         }).then(this._checkResponse);
     }
 
     addCardLike(cardId) {
+        const token = localStorage.getItem('token');
         const requestUrl = this._baseUrl + `/cards/likes/${cardId}`;
         return fetch(requestUrl, {
             method: 'PUT',
-            headers: this._headers,
+            headers: {
+                'content-type': 'application/json',
+                authorization: `Bearer ${token}`,
+            },
         }).then(this._checkResponse);
     }
 
     deleteCardLike(cardId) {
+        const token = localStorage.getItem('token');
         const requestUrl = this._baseUrl + `/cards/likes/${cardId}`;
         return fetch(requestUrl, {
             method: 'DELETE',
-            headers: this._headers,
+            headers: {
+                'content-type': 'application/json',
+                authorization: `Bearer ${token}`,
+            },
         }).then(this._checkResponse);
     }
 
     setProfileAvatar(body) {
+        const token = localStorage.getItem('token');
         const requestUrl = this._baseUrl + `/users/me/avatar`;
         return fetch(requestUrl, {
             method: 'PATCH',
-            headers: this._headers,
+            headers: {
+                'content-type': 'application/json',
+                authorization: `Bearer ${token}`,
+            },
             body: JSON.stringify(body),
         }).then(this._checkResponse);
     }
@@ -84,10 +117,6 @@ class Api {
 
 const api = new Api({
     baseUrl: 'http://localhost:4000',
-    headers: {
-        authorization: 'a772ee3c-7f9f-4379-9fba-e4883f8faf6c',
-        'Content-Type': 'application/json',
-    },
 });
 
 export default api;

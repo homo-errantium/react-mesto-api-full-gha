@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from "react";
-import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { Route, Routes, Navigate, useNavigate } from 'react-router-dom';
 
-import Header from "./Header";
-import Main from "./Main";
-import Footer from "./Footer";
-import Login from "./Login";
-import Register from "./Register";
+import Header from './Header';
+import Main from './Main';
+import Footer from './Footer';
+import Login from './Login';
+import Register from './Register';
 
-import EditProfilePopup from "./EditProfilePopup";
-import EditAvatarPopup from "./EditAvatarPopup";
-import AddPlacePopup from "./AddPlacePopup";
-import ImagePopup from "./ImagePopup";
-import InfoTooltip from "./InfoTooltip";
+import EditProfilePopup from './EditProfilePopup';
+import EditAvatarPopup from './EditAvatarPopup';
+import AddPlacePopup from './AddPlacePopup';
+import ImagePopup from './ImagePopup';
+import InfoTooltip from './InfoTooltip';
 
-import api from "../utils/Api";
-import * as auth from "../utils/Auth";
-import ProtectedRoute from "./ProtectedRoute";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import api from '../utils/Api';
+import * as auth from '../utils/Auth';
+import ProtectedRoute from './ProtectedRoute';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function App() {
     /*начальное состояние попапов*/
@@ -35,8 +35,8 @@ function App() {
     const [isLoggedIn, setLoggedIn] = React.useState(false);
     const [isRegistred, setIsRegistred] = React.useState(null);
     const [userData, setUserData] = useState({
-        _id: "",
-        email: "",
+        _id: '',
+        email: '',
     });
 
     const navigate = useNavigate();
@@ -109,7 +109,7 @@ function App() {
         api.deleteCard(card._id)
             .then((newCard) => {
                 const newCards = cards.filter((c) =>
-                    c._id === card._id ? "" : newCard
+                    c._id === card._id ? '' : newCard
                 );
                 setCards(newCards);
             })
@@ -151,6 +151,18 @@ function App() {
         setUserData({ email: email });
     }
 
+    //  React.useEffect(() => {
+    //      const jwt = localStorage.getItem('jwt');
+    //      if (jwt) {
+    //          Promise.all([api.getInfo(), api.getInitialCards()])
+    //              .then(([user, cards]) => {
+    //                  setCurrentUser(user);
+    //                  setCards(cards);
+    //              })
+    //              .catch((err) => console.log(err));
+    //      }
+    //  }, [isLoggedIn]);
+
     /*взятие данных с сервера*/
     React.useEffect(() => {
         Promise.all([api.getUserInfo(), api.getInitialCards()])
@@ -159,14 +171,14 @@ function App() {
                 setCards(cards);
             })
             .catch((err) => console.log(err));
-    }, []);
+    }, [isLoggedIn]);
 
     const handleLogin = () => {
         setLoggedIn(true);
     };
 
     const handleTokenCheck = () => {
-        const jwt = localStorage.getItem("token");
+        const jwt = localStorage.getItem('token');
         if (jwt) {
             auth.checkToken(jwt).then((res) => {
                 if (res) {
@@ -179,7 +191,7 @@ function App() {
                             };
                             setUserData(userData);
                             handleLogin();
-                            navigate("/main", { replace: true });
+                            navigate('/main', { replace: true });
                         })
                         .catch((err) => {
                             console.log(`Ошибка проверки токена: ${err}`);
@@ -191,25 +203,25 @@ function App() {
 
     return (
         <CurrentUserContext.Provider value={currentUser}>
-            <div className="root">
-                <div className="page">
-                    <div className="page__container">
+            <div className='root'>
+                <div className='page'>
+                    <div className='page__container'>
                         <Header userData={userData} isLoggedIn={isLoggedIn} />
 
                         <Routes>
                             <Route
-                                path="/"
+                                path='/'
                                 element={
                                     isLoggedIn ? (
-                                        <Navigate to="/main" replace />
+                                        <Navigate to='/main' replace />
                                     ) : (
-                                        <Navigate to="/sign-in" replace />
+                                        <Navigate to='/sign-in' replace />
                                     )
                                 }
                             />
                             {/* роут авторизации */}
                             <Route
-                                path="/sign-in"
+                                path='/sign-in'
                                 element={
                                     <Login
                                         handleLogin={handleLogin}
@@ -219,7 +231,7 @@ function App() {
                             />
                             {/* роут регистрации */}
                             <Route
-                                path="/sign-up"
+                                path='/sign-up'
                                 element={
                                     <Register
                                         handleRegistred={handleRegistred}
@@ -229,7 +241,7 @@ function App() {
                             />
                             {/* роут основной страницы */}
                             <Route
-                                path="/main"
+                                path='/main'
                                 index
                                 element={
                                     <>

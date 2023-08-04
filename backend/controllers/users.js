@@ -150,11 +150,9 @@ module.exports.updateUserAvatar = (req, res, next) => {
       new: true, // обработчик then получит на вход обновлённую запись
       runValidators: true,
     },
-  )
-    .then((user) => res.status(SUCCES_CODE).send({ data: user }))
-    .catch((err) => {
-      if (err.name === 'ValidationError') {
-        return res.status(BAD_REQUEST_CODE).send({
+rs: true,
+    },
+.status(BAD_REQUEST_CODE).send({
           message: 'Переданы некорректные данные при обновлении аватара.',
         });
       }

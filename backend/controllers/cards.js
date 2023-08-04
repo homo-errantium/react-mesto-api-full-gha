@@ -14,7 +14,7 @@ module.exports.createCard = (req, res, next) => {
     .catch((err) => {
       if (err.name === 'ValidationError') {
         throw new BadRequestError(
-          'Переданы некорректные данные при создании карточки.',
+          'Переданы некорректные данные при создании карточки.'
         );
       }
       return new ServerError('На сервере произошла ошибка');
@@ -31,8 +31,8 @@ module.exports.deleteCard = (req, res, next) => {
       if (req.user._id !== owner) {
         return next(
           new ForbiddenError(
-            'У Вас недостаточно прав для совершения данной операции.',
-          ),
+            'У Вас недостаточно прав для совершения данной операции.'
+          )
         );
       }
       return Card.deleteOne(card)
@@ -60,7 +60,7 @@ module.exports.getAllCards = (req, res, next) => {
       new: true, // обработчик then получит на вход обновлённую запись
       runValidators: true, // данные будут валидированы перед изменением
       // upsert: true, // если пользователь не найден, он будет создан
-    },
+    }
   )
     .then((cards) => res.status(SUCCES_CODE).send({ data: cards }))
     .catch((err) => {
@@ -70,43 +70,45 @@ module.exports.getAllCards = (req, res, next) => {
 };
 
 // 400 — Переданы некорректные данные для постановки/снятии лайка...
-module.exports.likeCard = (req, res, next) => Card.findByIdAndUpdate(
-  req.params.cardId,
-  { $addToSet: { likes: req.user._id } }, // добавить _id в массив, если его там нет
-  { new: true },
-)
-  .orFail()
-  .then((card) => res.status(SUCCES_CODE).send({ data: card }))
-  .catch((err) => {
-    if (err.name === 'CastError') {
-      throw new BadRequestError(
-        'Переданы некорректные данные для постановки лайка',
-      );
-    }
-    if (err.name === 'DocumentNotFoundError') {
-      throw new NotFoundError('Передан несуществующий _id карточки.');
-    }
-    return new ServerError('На сервере произошла ошибка');
-  })
-  .catch(next);
+module.exports.likeCard = (req, res, next) =>
+  Card.findByIdAndUpdate(
+    req.params.cardId,
+    { $addToSet: { likes: req.user._id } }, // добавить _id в массив, если его там нет
+    { new: true }
+  )
+    .orFail()
+    .then((card) => res.status(SUCCES_CODE).send({ data: card }))
+    .catch((err) => {
+      if (err.name === 'CastError') {
+        throw new BadRequestError(
+          'Переданы некорректные данные для постановки лайка'
+        );
+      }
+      if (err.name === 'DocumentNotFoundError') {
+        throw new NotFoundError('Передан несуществующий _id карточки.');
+      }
+      return new ServerError('На сервере произошла ошибка');
+    })
+    .catch(next);
 
 //  404 — Передан несуществующий _id карточки. 500 — На сервере произошла ошибка.
-module.exports.dislikeCard = (req, res, next) => Card.findByIdAndUpdate(
-  req.params.cardId,
-  { $pull: { likes: req.user._id } }, // убрать _id из массива
-  { new: true },
-)
-  .orFail()
-  .then((card) => res.status(SUCCES_CODE).send({ data: card }))
-  .catch((err) => {
-    if (err.name === 'CastError') {
-      throw new BadRequestError(
-        'Переданы некорректные данные для снятии лайка',
-      );
-    }
-    if (err.name === 'DocumentNotFoundError') {
-      throw new NotFoundError('Передан несуществующий _id карточки.');
-    }
-    return new ServerError('На сервере произошла ошибка');
-  })
-  .catch(next);
+module.exports.dislikeCard = (req, res, next) =>
+  Card.findByIdAndUpdate(
+    req.params.cardId,
+    { $pull: { likes: req.user._id } }, // убрать _id из массива
+    { new: true }
+  )
+    .orFail()
+    .then((card) => res.status(SUCCES_CODE).send({ data: card }))
+    .catch((err) => {
+      if (err.name === 'CastError') {
+        throw new BadRequestError(
+          'Переданы некорректные данные для снятии лайка'
+        );
+      }
+      if (err.name === 'DocumentNotFoundError') {
+        throw new NotFoundError('Передан несуществующий _id карточки.');
+      }
+      return new ServerError('На сервере произошла ошибка');
+    })
+    .catch(next);
