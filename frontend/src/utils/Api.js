@@ -13,14 +13,14 @@ class Api {
     }
 
     getUserInfo() {
-        const requestUrl = this._baseUrl + "/users/me";
+        const requestUrl = this._baseUrl + '/users/me';
         return fetch(requestUrl, {
             headers: this._headers,
         }).then(this._checkResponse);
     }
 
     getInitialCards() {
-        const requestUrl = this._baseUrl + "/cards";
+        const requestUrl = this._baseUrl + '/cards';
         return fetch(requestUrl, {
             headers: this._headers,
         }).then(this._checkResponse);
@@ -31,18 +31,18 @@ class Api {
     }
 
     setUserInfo(body) {
-        const requestUrl = this._baseUrl + "/users/me";
+        const requestUrl = this._baseUrl + '/users/me';
         return fetch(requestUrl, {
-            method: "PATCH",
+            method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify(body),
         }).then(this._checkResponse);
     }
 
     addNewCard(body) {
-        const requestUrl = this._baseUrl + "/cards";
+        const requestUrl = this._baseUrl + '/cards';
         return fetch(requestUrl, {
-            method: "POST",
+            method: 'POST',
             headers: this._headers,
             body: JSON.stringify(body),
         }).then(this._checkResponse);
@@ -51,7 +51,7 @@ class Api {
     deleteCard(cardId) {
         const requestUrl = this._baseUrl + `/cards/${cardId}`;
         return fetch(requestUrl, {
-            method: "DELETE",
+            method: 'DELETE',
             headers: this._headers,
         }).then(this._checkResponse);
     }
@@ -59,7 +59,7 @@ class Api {
     addCardLike(cardId) {
         const requestUrl = this._baseUrl + `/cards/likes/${cardId}`;
         return fetch(requestUrl, {
-            method: "PUT",
+            method: 'PUT',
             headers: this._headers,
         }).then(this._checkResponse);
     }
@@ -67,7 +67,7 @@ class Api {
     deleteCardLike(cardId) {
         const requestUrl = this._baseUrl + `/cards/likes/${cardId}`;
         return fetch(requestUrl, {
-            method: "DELETE",
+            method: 'DELETE',
             headers: this._headers,
         }).then(this._checkResponse);
     }
@@ -75,7 +75,7 @@ class Api {
     setProfileAvatar(body) {
         const requestUrl = this._baseUrl + `/users/me/avatar`;
         return fetch(requestUrl, {
-            method: "PATCH",
+            method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify(body),
         }).then(this._checkResponse);
@@ -83,10 +83,10 @@ class Api {
 }
 
 const api = new Api({
-    baseUrl: "https://mesto.nomoreparties.co/v1/cohort-65",
+    baseUrl: 'http://localhost:4000',
     headers: {
-        authorization: "a772ee3c-7f9f-4379-9fba-e4883f8faf6c",
-        "Content-Type": "application/json",
+        authorization: 'a772ee3c-7f9f-4379-9fba-e4883f8faf6c',
+        'Content-Type': 'application/json',
     },
 });
 

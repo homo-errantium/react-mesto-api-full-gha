@@ -1,4 +1,4 @@
-export const BASE_URL = "https://auth.nomoreparties.co";
+export const BASE_URL = 'http://localhost:4000';
 
 function checkResponse(res) {
     if (res.ok) {
@@ -11,7 +11,7 @@ function checkResponse(res) {
 export function getContent(token) {
     return fetch(`${BASE_URL}/users/me`, {
         headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
         },
     })
@@ -21,9 +21,9 @@ export function getContent(token) {
 
 export const register = (password, email) => {
     return fetch(`${BASE_URL}/signup`, {
-        method: "POST",
+        method: 'POST',
         headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
         },
         body: JSON.stringify({ password, email }),
     }).then((res) => checkResponse(res));
@@ -31,16 +31,16 @@ export const register = (password, email) => {
 
 export const authorize = (password, email) => {
     return fetch(`${BASE_URL}/signin`, {
-        method: "POST",
+        method: 'POST',
         headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
         },
         body: JSON.stringify({ password, email }),
     })
         .then((res) => checkResponse(res))
         .then((data) => {
             if (data.token) {
-                localStorage.setItem("token", data.token);
+                localStorage.setItem('token', data.token);
                 return data;
             } else {
                 return;
@@ -50,9 +50,9 @@ export const authorize = (password, email) => {
 
 export const checkToken = (token) => {
     return fetch(`${BASE_URL}/users/me`, {
-        method: "GET",
+        method: 'GET',
         headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
         },
     }).then((res) => checkResponse(res));
