@@ -6,8 +6,7 @@ const { errors } = require('celebrate');
 const cors = require('cors');
 // const cookieParser = require('cookie-parser');
 
-const { PORT = 4000, DB_URL = 'mongodb://127.0.0.1:27017/mestodb' } =
-  process.env;
+const { PORT = 4000, DB_URL = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;
 
 const options = {
   origin: ['http://localhost:3000'],
@@ -30,7 +29,6 @@ app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(helmet());
-
 
 const { users } = require('./routes/users');
 const { cards } = require('./routes/cards');
