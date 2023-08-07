@@ -78,8 +78,9 @@ class Api {
     }
 
     addCardLike(cardId) {
+        console.log(cardId);
         const token = localStorage.getItem('token');
-        const requestUrl = this._baseUrl + `/cards/likes/${cardId}`;
+        const requestUrl = this._baseUrl + `/cards/${cardId}/likes`;
         return fetch(requestUrl, {
             method: 'PUT',
             headers: {
@@ -91,7 +92,7 @@ class Api {
 
     deleteCardLike(cardId) {
         const token = localStorage.getItem('token');
-        const requestUrl = this._baseUrl + `/cards/likes/${cardId}`;
+        const requestUrl = this._baseUrl + `/cards/${cardId}/likes`;
         return fetch(requestUrl, {
             method: 'DELETE',
             headers: {

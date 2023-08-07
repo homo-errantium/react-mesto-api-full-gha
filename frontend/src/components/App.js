@@ -82,7 +82,7 @@ function App() {
     /*лайк карточки*/
     function handleCardLike(card) {
         // Снова проверяем, есть ли уже лайк на этой карточке
-        const isLiked = card.likes.some((i) => i._id === currentUser._id);
+        const isLiked = card.likes.includes(currentUser._id);
 
         // Отправляем запрос в API и получаем обновлённые данные карточки
         if (!isLiked) {
@@ -151,26 +151,16 @@ function App() {
         setUserData({ email: email });
     }
 
-    //  React.useEffect(() => {
-    //      const jwt = localStorage.getItem('jwt');
-    //      if (jwt) {
-    //          Promise.all([api.getInfo(), api.getInitialCards()])
-    //              .then(([user, cards]) => {
-    //                  setCurrentUser(user);
-    //                  setCards(cards);
-    //              })
-    //              .catch((err) => console.log(err));
-    //      }
-    //  }, [isLoggedIn]);
-
     /*взятие данных с сервера*/
     React.useEffect(() => {
-        Promise.all([api.getUserInfo(), api.getInitialCards()])
-            .then(([user, cards]) => {
-                setCurrentUser(user);
-                setCards(cards);
-            })
-            .catch((err) => console.log(err));
+        // const jwt = localStorage.getItem('token');
+        isLoggedIn &&
+            Promise.all([api.getUserInfo(), api.getInitialCards()])
+                .then(([user, cards]) => {
+                    setCurrentUser(user);
+                    setCards(cards);
+                })
+                .catch((err) => console.log(err));
     }, [isLoggedIn]);
 
     const handleLogin = () => {
@@ -179,6 +169,7 @@ function App() {
 
     const handleTokenCheck = () => {
         const jwt = localStorage.getItem('token');
+
         if (jwt) {
             auth.checkToken(jwt).then((res) => {
                 if (res) {

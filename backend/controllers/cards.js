@@ -10,7 +10,7 @@ module.exports.createCard = (req, res, next) => {
   const { name, link } = req.body;
   const owner = req.user._id;
   Card.create({ name, link, owner })
-    .then((card) => res.status(CREATE_CODE).send({ data: card }))
+    .then((card) => res.status(CREATE_CODE).send(card))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         throw new BadRequestError(
@@ -37,7 +37,7 @@ module.exports.deleteCard = (req, res, next) => {
       }
       return Card.deleteOne(card)
         .then(() => {
-          res.status(SUCCES_CODE).send({ data: card });
+          res.status(SUCCES_CODE).send(card);
         })
         .catch(next);
     })
@@ -54,15 +54,8 @@ module.exports.deleteCard = (req, res, next) => {
 };
 
 module.exports.getAllCards = (req, res, next) => {
-  Card.find(
-    {},
-    {
-      new: true, // обработчик then получит на вход обновлённую запись
-      runValidators: true, // данные будут валидированы перед изменением
-      // upsert: true, // если пользователь не найден, он будет создан
-    }
-  )
-    .then((cards) => res.status(SUCCES_CODE).send({ data: cards }))
+  Card.find({})
+    .then((cards) => res.status(SUCCES_CODE).send(cards))
     .catch((err) => {
       throw new ServerError(err.message);
     })
@@ -77,7 +70,7 @@ module.exports.likeCard = (req, res, next) =>
     { new: true }
   )
     .orFail()
-    .then((card) => res.status(SUCCES_CODE).send({ data: card }))
+    .then((card) => res.status(SUCCES_CODE).send(card))
     .catch((err) => {
       if (err.name === 'CastError') {
         throw new BadRequestError(
@@ -99,7 +92,7 @@ module.exports.dislikeCard = (req, res, next) =>
     { new: true }
   )
     .orFail()
-    .then((card) => res.status(SUCCES_CODE).send({ data: card }))
+    .then((card) => res.status(SUCCES_CODE).send(card))
     .catch((err) => {
       if (err.name === 'CastError') {
         throw new BadRequestError(

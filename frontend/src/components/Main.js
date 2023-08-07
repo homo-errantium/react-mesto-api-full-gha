@@ -42,7 +42,7 @@ function Main(props) {
                         <Card
                             onCardLike={props.onCardLike}
                             key={card._id}
-                            {...card}
+                            card={card}
                             onCardClick={props.onCardClick}
                             onCardDelete={props.onCardDelete}
                         />

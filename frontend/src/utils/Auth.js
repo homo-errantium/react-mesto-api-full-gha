@@ -14,9 +14,9 @@ export function getContent(token) {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
         },
-    })
-        .then((res) => checkResponse(res))
-        .then((data) => data);
+    }).then((res) => {
+        checkResponse(res);
+    });
 }
 
 export const register = (password, email) => {
