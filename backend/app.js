@@ -6,8 +6,7 @@ const { errors } = require('celebrate');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const cors = require('cors');
 
-const { PORT = 4000, DB_URL = 'mongodb://127.0.0.1:27017/mestodb' } =
-  process.env;
+const { PORT = 4000, DB_URL = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;
 
 const options = {
   origin: ['http://localhost:3000'],
