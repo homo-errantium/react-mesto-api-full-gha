@@ -1,44 +1,38 @@
-import logo from "../images/logo.svg";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import logo from '../images/logo.svg';
+import { Link, useLocation } from 'react-router-dom';
 
 function Header(props) {
     let location = useLocation();
     let { email } = props.userData;
-
-    const navigate = useNavigate();
-
-    function onSignOut() {
-        localStorage.removeItem("token");
-        navigate("/sign-in", { replace: true });
-    }
+    const signOut = props.signOut;
 
     function changeNavBar(path) {
-        if (path === "/sign-in") {
+        if (path === '/sign-in') {
             return (
-                <Link className="header__link" to="/sign-up">
+                <Link className='header__link' to='/sign-up'>
                     Регистрация
                 </Link>
             );
         } else {
-            if (path === "/sign-up") {
+            if (path === '/sign-up') {
                 return (
                     <Link
-                        className="header__link header__link_logout"
-                        to="/sign-in"
+                        className='header__link header__link_logout'
+                        to='/sign-in'
                     >
                         Войти
                     </Link>
                 );
             } else {
-                if (path === "/main") {
+                if (path === '/main') {
                     return (
                         <>
-                            <p className="header__link">{email}</p>
+                            <p className='header__link'>{email}</p>
                             <button
-                                className="header__btn"
-                                type="button"
-                                aria-label="Выход"
-                                onClick={onSignOut}
+                                className='header__btn'
+                                type='button'
+                                aria-label='Выход'
+                                onClick={signOut}
                             >
                                 Выйти
                             </button>
@@ -50,9 +44,9 @@ function Header(props) {
     }
 
     return (
-        <header className="header">
-            <img className="header__logo" src={logo} alt="Логотип Mesto" />
-            <div className="header__navbar">
+        <header className='header'>
+            <img className='header__logo' src={logo} alt='Логотип Mesto' />
+            <div className='header__navbar'>
                 {changeNavBar(location.pathname)}
             </div>
         </header>

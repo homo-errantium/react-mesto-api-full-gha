@@ -184,12 +184,22 @@ function App() {
         }
     };
 
+    function signOut() {
+        localStorage.removeItem('token');
+        navigate('/sign-in', { replace: true });
+        setLoggedIn(false);
+    }
+
     return (
         <CurrentUserContext.Provider value={currentUser}>
             <div className='root'>
                 <div className='page'>
                     <div className='page__container'>
-                        <Header userData={userData} isLoggedIn={isLoggedIn} />
+                        <Header
+                            signOut={signOut}
+                            userData={userData}
+                            isLoggedIn={isLoggedIn}
+                        />
 
                         <Routes>
                             <Route

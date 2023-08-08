@@ -17,27 +17,25 @@ const {
 // 400 — Переданы некорректные данные при создании пользователя. 500 — На сервере произошла ошибка.
 
 module.exports.createUser = (req, res, next) => {
-  const { name, about, avatar, email, password } = req.body;
+  const {
+    name, about, avatar, email, password,
+  } = req.body;
   bcrypt
     .hash(password, 10)
-    .then((hash) =>
-      User.create({
-        name,
-        about,
-        avatar,
-        email,
-        password: hash,
-      })
-    )
-    .then((user) =>
-      res.status(CREATE_CODE).send({
-        email: user.email,
-        name: user.name,
-        about: user.about,
-        avatar: user.avatar,
-        _id: user._id,
-      })
-    )
+    .then((hash) => User.create({
+      name,
+      about,
+      avatar,
+      email,
+      password: hash,
+    }))
+    .then((user) => res.status(CREATE_CODE).send({
+      email: user.email,
+      name: user.name,
+      about: user.about,
+      avatar: user.avatar,
+      _id: user._id,
+    }))
     .catch((err) => {
       if (err.code === 11000) {
         throw new ConflictError('Пользователь с данным email уже существует');
@@ -45,7 +43,7 @@ module.exports.createUser = (req, res, next) => {
 
       if (err.name === 'ValidationError') {
         throw new BadRequestError(
-          'Переданы некорректные данные при создании пользователя.'
+          'Переданы некорректные данные при создании пользователя.',
         );
       }
       return new ServerError('На сервере произошла ошибка');
@@ -123,13 +121,13 @@ module.exports.updateUserInfo = (req, res, next) => {
     {
       new: true, // обработчик then получит на вход обновлённую запись
       runValidators: true,
-    }
+    },
   )
     .then((user) => res.status(SUCCES_CODE).send(user))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         throw new BadRequestError(
-          'Переданы некорректные данные при обновлении профиля.'
+          'Переданы некорректные данные при обновлении профиля.',
         );
       }
       if (err.name === 'DocumentNotFoundError') {
@@ -151,7 +149,7 @@ module.exports.updateUserAvatar = (req, res, next) => {
     {
       new: true, // обработчик then получит на вход обновлённую запись
       runValidators: true,
-    }
+    },
   )
     .then((user) => res.status(SUCCES_CODE).send({ data: user }))
     .catch((err) => {
