@@ -8,17 +8,6 @@ function checkResponse(res) {
     }
 }
 
-export function getContent(token) {
-    return fetch(`${BASE_URL}/users/me`, {
-        headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-        },
-    }).then((res) => {
-        checkResponse(res);
-    });
-}
-
 export const register = (password, email) => {
     return fetch(`${BASE_URL}/signup`, {
         method: 'POST',
@@ -54,6 +43,16 @@ export const checkToken = (token) => {
         headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
+        },
+    }).then((res) => checkResponse(res));
+};
+
+export const logOut = () => {
+    return fetch(`${BASE_URL}`, {
+        method: 'GET',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
         },
     }).then((res) => checkResponse(res));
 };

@@ -169,24 +169,16 @@ function App() {
 
     const handleTokenCheck = () => {
         const jwt = localStorage.getItem('token');
-
         if (jwt) {
             auth.checkToken(jwt).then((res) => {
                 if (res) {
-                    auth.getContent(jwt)
-                        .then((res) => {
-                            const data = res.data;
-                            const userData = {
-                                _id: data._id,
-                                email: data.email,
-                            };
-                            setUserData(userData);
-                            handleLogin();
-                            navigate('/main', { replace: true });
-                        })
-                        .catch((err) => {
-                            console.log(`Ошибка проверки токена: ${err}`);
-                        });
+                    const userData = {
+                        _id: res._id,
+                        email: res.email,
+                    };
+                    setUserData(userData);
+                    handleLogin();
+                    navigate('/main', { replace: true });
                 }
             });
         }

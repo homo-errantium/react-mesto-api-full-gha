@@ -78,7 +78,6 @@ class Api {
     }
 
     addCardLike(cardId) {
-        console.log(cardId);
         const token = localStorage.getItem('token');
         const requestUrl = this._baseUrl + `/cards/${cardId}/likes`;
         return fetch(requestUrl, {
