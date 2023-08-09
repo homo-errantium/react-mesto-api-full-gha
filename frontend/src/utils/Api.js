@@ -116,7 +116,7 @@ class Api {
 }
 
 const api = new Api({
-    baseUrl: 'http://localhost:4000',
+    baseUrl: 'https://api.my.place.nomoreparties.co',
 });
 
 export default api;
