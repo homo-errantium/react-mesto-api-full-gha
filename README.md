@@ -6,13 +6,21 @@
 
 Адрес репозитория: https://github.com/homo-errantium/react-mesto-api-full-gha
 
-## Ссылки на проект
+<!-- ## Ссылки на проект -->
 
-IP-адрес 51.250.14.4
+<!-- IP-адрес 51.250.14.4
 
 Frontend [https://my.place.nomoreparties.co](https://my.place.nomoreparties.co)
 
-Backend [https://api.my.place.nomoreparties.co](https://api.my.place.nomoreparties.co)
+Backend [https://api.my.place.nomoreparties.co](https://api.my.place.nomoreparties.co) -->
+
+# Ссылки:
+
+Frontend: https://my.place.nomoreparties.co
+
+Backend: https://api.my.place.nomoreparties.co
+
+IP 51.250.14.4
 
 # cписок технологий:
 
