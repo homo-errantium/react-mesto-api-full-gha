@@ -23,7 +23,9 @@ Frontend: https://my.place.nomoreparties.co
 Backend: https://api.my.place.nomoreparties.co -->
 
 IP 51.250.14.4
+
 Frontend https://my.place.nomoreparties.co
+
 Backend https://api.my.place.nomoreparties.co
 
 # cписок технологий:
