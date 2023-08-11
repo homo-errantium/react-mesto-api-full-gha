@@ -120,6 +120,7 @@ function App() {
         setIsLoading(true);
         api.setUserInfo(data)
             .then((newUser) => {
+                console.log(newUser);
                 setCurrentUser(newUser);
                 closeAllPopups();
             })
@@ -132,7 +133,7 @@ function App() {
     function handleUpdateAvatar(data) {
         api.setProfileAvatar(data)
             .then((newAvatar) => {
-                setCurrentUser(newAvatar);
+                setCurrentUser(newAvatar.data);
                 closeAllPopups();
             })
             .catch((err) => console.log(err));
