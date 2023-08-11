@@ -14,6 +14,7 @@ const { PORT = 3000, DB_URL = 'mongodb://127.0.0.1:27017/mestodb' } = process.en
 const options = {
   origin: [
     'http://localhost:3000',
+    'http://localhost:3001',
     'http://my.place.nomoreparties.co',
     'https://my.place.nomoreparties.co',
     'http://api.my.place.nomoreparties.co',
