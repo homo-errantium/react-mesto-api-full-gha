@@ -28,7 +28,7 @@ list of technologies:
 -   webpack5
 -   React
 
-Thank you for watching) # Site-project "Mesto. Russia"
+Thank you for watching. # Site-project "Mesto. Russia"
 
 This project is an interactive platform where you can:
 
