@@ -9,14 +9,15 @@ const { errors } = require('celebrate');
 const cors = require('cors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-const { PORT = 3000, DB_URL = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;
+const { PORT = 3000, DB_URL = 'mongodb://127.0.0.1:27017/mestodb' } =
+  process.env;
 
 const options = {
   origin: [
     'http://localhost:3000',
-    'http://my.place.nomoreparties.co',
+    // 'http://my.place.nomoreparties.co',
     'https://my.place.nomoreparties.co',
-    'http://api.my.place.nomoreparties.co',
+    // 'http://api.my.place.nomoreparties.co',
     'https://api.my.place.nomoreparties.co',
   ],
   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
