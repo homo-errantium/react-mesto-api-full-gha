@@ -120,7 +120,6 @@ function App() {
         setIsLoading(true);
         api.setUserInfo(data)
             .then((newUser) => {
-                console.log(newUser);
                 setCurrentUser(newUser);
                 closeAllPopups();
             })
