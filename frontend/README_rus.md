@@ -31,7 +31,7 @@ cписок технологий:
 ## Инструкция по установке:
 
 1. Клонировать репозиторий
-   `git clone https://github.com/Sonyamaster1/mesto-react-auth`
+   `git clone https://github.com/homo-errantium/mesto-react-auth`
 2. Установить зависимости
    `npm install`
 3. Запустить локально
